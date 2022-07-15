@@ -1,0 +1,39 @@
+package Documento;
+
+import java.util.ArrayList;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+public class Documento {
+
+	public static Document request(String url, ArrayList<String> a) {
+        try {
+
+            Connection con = Jsoup.connect(url);
+            Document doc = con.get();
+            con.header(url, url);
+            System.out.println(con);
+            Connection.Response response = Jsoup.connect(url).execute();
+
+            if (con.response().statusCode() == 200) {
+            	System.out.println("|-------------------------------------------");
+                System.out.println("| LINK: " + url + " /n");
+                System.out.println("| HEADERS DE(A): " + url + " -- Header: " + response.multiHeaders());
+                for (Element sentence : doc.getElementsByTag("form")) {
+                    System.out.println("| FORM's DE(A):" + url + sentence.text());
+                   
+                }
+               a.add(url);
+                return (Document) doc; 
+            }
+            System.out.println("|-------------------------------------------");
+        } catch (Exception e) {
+            return null;
+
+        }
+        return null;
+    }
+	
+}
