@@ -1,0 +1,38 @@
+package Crawl;
+
+import java.util.ArrayList;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+
+import Documento.Documento;
+
+public class Crawl {
+
+	public static void crawle(int level, String url, ArrayList<String> visited) {
+		
+		Documento rq = new Documento();
+		
+        if (level <= 5) {
+
+            Document doc = rq.request(url, visited);
+            
+            if (doc != null) {
+            	
+                for (Element link : doc.select("a[href]")) {
+                	
+                    String next_link = link.absUrl("href");
+                    
+                    if (visited.contains(next_link) == false) {
+                    	
+                        crawle(level++, next_link, visited);
+                        
+                    }
+                
+                }
+                
+            }
+            
+        }        
+    }
+	
+}
