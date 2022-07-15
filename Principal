@@ -1,0 +1,29 @@
+package Principal;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import Crawl.Crawl;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Crawl cl = new Crawl();
+		
+		Scanner surl = new Scanner(System.in);
+        System.out.println("|------------------------------|");
+        System.out.println("");
+        System.out.println("|Digite Abaixo a URL De Partida|");
+        System.out.println("");
+        System.out.println("|------------------------------|");
+        System.out.print("URL --> ");
+       
+        String vurl = surl.nextLine();
+        cl.crawle(1, vurl, new ArrayList<String>());
+        
+        surl.close();
+		
+	}
+
+}
